@@ -1,29 +1,40 @@
-<mat-table [dataSource]="missions">
-    <ng-container matColumnDef="mission_name">
-      <mat-header-cell *matHeaderCellDef> Mission Name </mat-header-cell>
-      <mat-cell *matCellDef="let mission">
-        <a [routerLink]="['/mission', mission.flight_number]">{{ mission.mission_name }}</a>
-      </mat-cell>
-    </ng-container>
+
+<form [formGroup]="searchForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Filter by year of launch</mat-label>
+      <input matInput type="number" formControlName="year">
+      <mat-icon-button matSuffix (click)="search()">
+        <mat-icon>search</mat-icon>
+      </mat-icon-button>
+      <button mat-button matSuffix (click)="search()">Search</button>
+    </mat-form-field>
+  </form>
   
-    <ng-container matColumnDef="launch_year">
-      <mat-header-cell *matHeaderCellDef> Launch Year </mat-header-cell>
-      <mat-cell *matCellDef="let mission"> {{ mission.launch_year }} </mat-cell>
-    </ng-container>
+    <mat-table [dataSource]="missions">
+      <ng-container matColumnDef="mission_name">
+        <mat-header-cell *matHeaderCellDef> Mission Name </mat-header-cell>
+        <mat-cell *matCellDef="let mission">
+          <a [routerLink]="['/mission', mission.flight_number]">{{ mission.mission_name }}</a>
+        </mat-cell>
+      </ng-container>
   
-    <ng-container matColumnDef="details">
-      <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
-      <mat-cell *matCellDef="let mission"> {{ mission.details }} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="launch_year">
+        <mat-header-cell *matHeaderCellDef> Launch Year </mat-header-cell>
+        <mat-cell *matCellDef="let mission"> {{ mission.launch_year }} </mat-cell>
+      </ng-container>
   
-    <ng-container matColumnDef="mission_patch_small">
-      <mat-header-cell *matHeaderCellDef> Mission Patch </mat-header-cell>
-      <mat-cell *matCellDef="let mission"> 
-        <img [src]="mission.links.mission_patch_small" alt="{{ mission.mission_name }}" width="50px" height="50px">
-      </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="details">
+        <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
+        <mat-cell *matCellDef="let mission"> {{ mission.details }} </mat-cell>
+      </ng-container>
   
-    <mat-header-row *matHeaderRowDef="['mission_name', 'launch_year', 'details', 'mission_patch_small']"></mat-header-row>
-    <mat-row *matRowDef="let mission; columns: ['mission_name', 'launch_year', 'details', 'mission_patch_small']"></mat-row>
-  </mat-table>
-s  
+      <ng-container matColumnDef="mission_patch_small">
+        <mat-header-cell *matHeaderCellDef> Mission Patch </mat-header-cell>
+        <mat-cell *matCellDef="let mission">
+          <img [src]="mission.links.mission_patch_small" alt="{{ mission.mission_name }}" width="50px" height="50px">
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="['mission_name', 'launch_year', 'details', 'mission_patch_small']"></mat-header-row>
+      <mat-row *matRowDef="let mission; columns: ['mission_name', 'launch_year', 'details', 'mission_patch_small']"></mat-row>
+    </mat-table>

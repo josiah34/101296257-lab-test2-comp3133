@@ -19,4 +19,8 @@ table {
     background-color: #f5f5f5;
     cursor: pointer;
   }
+  .table-container {
+    height: 400px; /* Set the height of the table container */
+    overflow: auto; /* Add a scroll bar if the table overflows */
+  }
   
